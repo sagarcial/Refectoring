@@ -1,5 +1,5 @@
 import tkinter as tk
-from PIL import Image, ImageTk  # Importa PIL (Pillow) para trabajar con imágenes
+from PIL import Image, ImageTk
 from banda import Banda
 from instrumento import Piano, Guitarra, Saxofon, Bajo, Flauta
 
@@ -12,7 +12,7 @@ def cargar_imagenes():
     imagenes = {}
     for musico in mi_banda.integrantes:
         instrumento_nombre = musico.instrumento_toca.nombre.lower()
-        imagen_path = f"{instrumento_nombre}.png"  # Asegúrate de que tienes las imágenes en la misma carpeta
+        imagen_path = f"imagenes/{instrumento_nombre}.png"  # Asegúrate de que tienes las imágenes en la misma carpeta
         imagen = Image.open(imagen_path)  # Abre la imagen con PIL
         imagen_tk = ImageTk.PhotoImage(imagen)  # Convierte la imagen a un formato que tkinter pueda mostrar
         imagenes[instrumento_nombre] = imagen_tk
@@ -31,6 +31,7 @@ def afinar_instrumentos_y_mostrar_info():
     mostrar_informacion()
 
 # Función para mostrar la información de la banda en la interfaz
+# Función para mostrar la información de la banda en la interfaz
 def mostrar_informacion():
     info_text.delete(1.0, tk.END)  # Limpiar el área de texto de información
     info_text.insert(tk.END, "Nombre de la banda: " + mi_banda.nombre + "\n")
@@ -41,7 +42,13 @@ def mostrar_informacion():
     
     info_text.insert(tk.END, "Integrantes de la banda:\n")
     for musico in mi_banda.integrantes:
-        info_text.insert(tk.END, "- Nombre: " + musico.nombre + ", Instrumento: " + musico.instrumento_toca.nombre + "\n")
+        instrumento_nombre = musico.instrumento_toca.nombre.lower()
+        imagen_path = f"imagenes/{instrumento_nombre}.png"  # Ruta a la imagen del instrumento
+        imagen = Image.open(imagen_path)
+        imagen_tk = ImageTk.PhotoImage(imagen)  # Convierte la imagen a un formato que tkinter pueda mostrar
+        info_text.image_create(tk.END, image=imagen_tk)  # Mostrar la imagen
+        info_text.insert(tk.END, f"\n- Nombre: {musico.nombre}, Instrumento: {musico.instrumento_toca.nombre}\n")
+
 
 # Crear la ventana de tkinter
 root = tk.Tk()
@@ -56,6 +63,9 @@ afinar_text = tk.Text(root, width=40, height=4)
 afinar_button.pack()
 afinar_text.pack()
 info_text.pack()
+
+# Mantener una referencia global a las imágenes
+imagenes = cargar_imagenes()
 
 # Mostrar información inicial al iniciar la aplicación
 mostrar_informacion()
