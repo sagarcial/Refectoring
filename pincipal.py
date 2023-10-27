@@ -1,5 +1,5 @@
-from banda import *
-from instrumento import *
+from banda import Banda
+from instrumento import Piano, Guitarra, Saxofon, Bajo, Flauta
 
 if __name__ == "__main__":
     # Crear una banda con algunos instrumentos
@@ -14,8 +14,8 @@ if __name__ == "__main__":
     # Dar la opción de afinar los instrumentos
     opcion = input("¿Deseas afinar los instrumentos de la banda? (S/N): ").strip().lower()
     b.consultar()
-    print ("\nTocando sonidos de la banda:\n")
+    print("\nTocando sonidos de la banda:\n")
     if opcion == 's':
         b.afinar_instrumentos()  # Llama al método para afinar los instrumentos
-    for Musico in b.integrantes:
-        Musico.tocar()    # Consultar la información actualizada de la banda
+    for musico in b.integrantes:
+        musico.tocar()  # Consultar la información actualizada de la banda

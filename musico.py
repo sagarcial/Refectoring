@@ -1,3 +1,5 @@
+from instrumento import Tocable, Afinable
+
 class Musico:
     def __init__(self, nombre, instrumento_toca):
         self.nombre = nombre
@@ -7,4 +9,5 @@ class Musico:
         self.instrumento_toca.tocar()
 
     def afinar_instrumento(self):
-        self.instrumento_toca.afinar()
+        if isinstance(self.instrumento_toca, Afinable):
+            self.instrumento_toca.afinar()

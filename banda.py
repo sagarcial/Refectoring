@@ -1,14 +1,16 @@
 from musico import Musico
-from instrumento import Instrumento
 from random import choice, randint
+from instrumento import Tocable, Afinable
 
 class Banda:
     def __init__(self, nombre, instrumentos):
         self.nombre = nombre
         self.integrantes = []
         self.instrumentos = instrumentos
+
     def tocar(self):
         pass
+
     def crear(self):
         for i in range(0, randint(1, 5)):
             instrumento_random = choice(self.instrumentos)
